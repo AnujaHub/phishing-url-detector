@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Home | Phishing URL Detector{% endblock %}
+{% block content %}
+<main class="page shell">
+    <section>
+        <div class="eyebrow">Cybersecurity tool</div>
+        <h1>Phishing URL Detector</h1>
+        <p class="lead">Analyze suspicious URLs using transparent heuristic checks and understand why a URL may be risky.</p>
+        <a class="button" href="{{ url_for('analyzer') }}">Analyze a URL <span aria-hidden="true">→</span></a>
+    </section>
+    <section class="section">
+        <h2>What does this tool check?</h2>
+        <p class="section-intro">A focused set of signals helps explain the result without hiding the reasoning.</p>
+        <div class="feature-grid">
+            <article class="feature"><span class="feature-index">01</span><h3>HTTPS Check</h3><p>Checks whether the URL uses secure HTTPS communication.</p></article>
+            <article class="feature"><span class="feature-index">02</span><h3>Domain Trust</h3><p>Checks whether the domain is present in the trusted-domain database.</p></article>
+            <article class="feature"><span class="feature-index">03</span><h3>Suspicious Keywords</h3><p>Looks for words commonly associated with phishing attempts.</p></article>
+            <article class="feature"><span class="feature-index">04</span><h3>Auth / Payment Paths</h3><p>Flags suspicious login, verification, account, or payment paths.</p></article>
+            <article class="feature"><span class="feature-index">05</span><h3>URL Complexity</h3><p>Checks for unusually complex URLs and suspicious structures.</p></article>
+        </div>
+    </section>
+    <section class="section">
+        <h2>How it works</h2>
+        <p class="section-intro">Four straightforward steps from input to an explainable result.</p>
+        <div class="steps">
+            <article class="step"><span class="step-number">01</span><h3>Enter URL</h3><p>Provide the address you want to inspect.</p></article>
+            <article class="step"><span class="step-number">02</span><h3>Analyze URL Structure</h3><p>Inspect its scheme, domain, path, and structure.</p></article>
+            <article class="step"><span class="step-number">03</span><h3>Calculate Risk Score</h3><p>Combine the detected signals into a score.</p></article>
+            <article class="step"><span class="step-number">04</span><h3>Show Verdict + Indicators</h3><p>Review the result and the reasons behind it.</p></article>
+        </div>
+    </section>
+    <section class="section">
+        <div class="info"><div><h2>Why transparent analysis?</h2><p>This tool does not simply output “safe” or “unsafe”. It shows the signals that contributed to the result so you can make a more informed decision.</p></div><ul class="info-list"><li>Risk score</li><li>Verdict</li><li>Detected indicators</li><li>Scan history</li></ul></div>
+    </section>
+    <section class="section cta"><h2>Ready to check a URL?</h2><p>Run a scan and inspect the result in the analyzer.</p><a class="button secondary" href="{{ url_for('analyzer') }}">Open Analyzer <span aria-hidden="true">→</span></a></section>
+</main>
+{% endblock %}

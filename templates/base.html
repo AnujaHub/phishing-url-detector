@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Phishing URL Detector{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="{{ url_for('home') }}">
+        <span class="brand-mark" aria-hidden="true">⌁</span>
+        <span>PhishHook</span>
+      </a>
+      <div class="nav-links">
+        <a
+          class="{% if request.endpoint == 'home' %}active{% endif %}"
+          href="{{ url_for('home') }}"
+          >Home</a
+        >
+        <a
+          class="{% if request.endpoint == 'analyzer' %}active{% endif %}"
+          href="{{ url_for('analyzer') }}"
+          >Analyzer</a
+        >
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>

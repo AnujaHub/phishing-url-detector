@@ -31,3 +31,7 @@ Timestamp,URL,Risk Score,Verdict,Indicators
 2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
 2026-09-11 09:15:53,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
 2026-09-11 09:36:48,http://paypal-login-verify-account.com,55,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Domain contains multiple hyphens (3) | Suspicious terms found in domain: login, verify, account"
+2026-10-09 22:21:49,https://janasya.com/,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-10-09 22:22:48,https://janasya.com/,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-10-09 22:23:15,https://www.umit.ac.in/,10,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database | Contains multiple subdomains (2)
+2026-10-09 22:25:00,http://example.com/login?verify=true&account=test&password=123,65,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account, password | Contains a suspicious authentication or payment path | Contains an unusually high number of special characters | URL has a high level of structural complexity"

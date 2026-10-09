@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Analyzer | Phishing URL Detector{% endblock %}
+{% block content %}
+<main class="page shell">
+    <header class="page-header"><div><div class="eyebrow">Analysis workspace</div><h1>URL Analyzer</h1><p>Check a URL for common phishing indicators.</p></div></header>
+    <section class="stats" aria-label="Scan statistics">
+        <div class="stat total"><h3>Total Scans</h3><strong>{{ statistics.total }}</strong><small>URLs analyzed</small></div>
+        <div class="stat high"><h3>High Risk</h3><strong>{{ statistics.high_risk }}</strong><small>Immediate attention</small></div>
+        <div class="stat suspicious"><h3>Suspicious</h3><strong>{{ statistics.suspicious }}</strong><small>Review recommended</small></div>
+        <div class="stat low"><h3>Low Risk</h3><strong>{{ statistics.low_risk }}</strong><small>No major signals found</small></div>
+    </section>
+    <section class="card">
+        <div class="card-title"><span class="title-mark" aria-hidden="true">↗</span><div><h2>Check a URL</h2><p>Enter a URL below to analyze common phishing indicators.</p></div></div>
+        <form method="POST">
+            <label for="url">Enter URL</label>
+            <div class="input-row"><input type="text" id="url" name="url" placeholder="https://example.com" required><button type="submit">Analyze URL</button></div>
+            <p class="helper">Example: https://example.com</p>
+        </form>
+    </section>
+    {% if result %}
+    <section class="card">
+        <div class="card-title"><span class="title-mark" aria-hidden="true">✓</span><div><h2>Analysis Result</h2><p>Security signals detected during this scan.</p></div></div>
+        <div class="result-grid">
+            <div class="result-item"><span class="result-label">URL</span><span class="result-value" title="{{ result.url }}">{{ result.url }}</span></div>
+            <div class="result-item"><span class="result-label">Timestamp</span><span class="result-value">{{ result.timestamp }}</span></div>
+            <div class="result-item"><span class="result-label">Risk Score</span><span class="result-value score">{{ result.score }}/100</span><div class="meter"><div class="meter-fill" style="width: {{ result.score }}%;"></div></div></div>
+            <div class="result-item"><span class="result-label">Verdict</span><span class="badge {{ result.verdict|lower|replace(' ', '-') }}">{{ result.verdict }}</span></div>
+        </div>
+        <div class="indicators"><strong>Detected indicators</strong><ul class="indicator-list">{% for indicator in result.indicators %}<li>{{ indicator }}</li>{% endfor %}</ul></div>
+    </section>
+    {% endif %}
+    <section class="card">
+        <button class="history-toggle" type="button" aria-expanded="false" aria-controls="history-content" onclick="toggleHistory(this)">
+            <span class="history-heading"><span class="title-mark" aria-hidden="true">≡</span><span><strong>Scan History</strong><p>{{ scans|length }} scans recorded</p></span></span>
+            <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="history-content" id="history-content"><div class="history-inner">
+            {% if scans %}<div class="history"><table><thead><tr><th>Timestamp</th><th>URL</th><th>Score</th><th>Verdict</th></tr></thead><tbody>{% for scan in scans %}<tr><td>{{ scan["Timestamp"] }}</td><td class="url-cell" title="{{ scan['URL'] }}">{{ scan["URL"] }}</td><td class="score-cell">{{ scan["Risk Score"] }}/100</td><td><span class="badge {{ scan['Verdict']|lower|replace(' ', '-') }}">{{ scan["Verdict"] }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty">No scans recorded yet. Analyze a URL to start building your history.</p>{% endif %}
+        </div></div>
+    </section>
+    <p class="helper" style="text-align:center; margin: 26px 0 0;">This tool uses heuristic analysis and should not be treated as a definitive security verdict.</p>
+</main>
+<script>
+    function toggleHistory(button) {
+        const content = document.getElementById("history-content");
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        content.classList.toggle("open", !expanded);
+    }
+</script>
+{% endblock %}

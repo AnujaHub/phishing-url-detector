@@ -67,11 +67,17 @@ def get_statistics(scans):
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    if request.method == "POST":
+        return analyzer()
 
+    return render_template("home.html")
+
+
+@app.route("/analyzer", methods=["GET", "POST"])
+def analyzer():
     result = None
 
     if request.method == "POST":
-
         url = request.form.get(
             "url",
             ""
@@ -105,7 +111,7 @@ def home():
     )
 
     return render_template(
-        "index.html",
+        "analyzer.html",
         result=result,
         scans=scans,
         statistics=statistics
